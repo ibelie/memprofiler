@@ -35,16 +35,19 @@ declare -a PACKAGES=(
     "python3-pip=22.0.2+dfsg-1ubuntu0.7"
 )
 
-# 逐个尝试安装
+# Packages that failed to install with specified version
+declare -a VERSION_MISMATCH_PKGS=()
+
 for pkg in "${PACKAGES[@]}"; do
     if sudo apt install -y "$pkg" 2>/dev/null; then
         echo "  [OK] $pkg"
     else
-        # 提取包名（去掉版本号）
+        # Record package that failed to install with specified version
         pkg_name="${pkg%%=*}"
         echo "  [FAIL] $pkg, trying $pkg_name without version..."
         if sudo apt install -y "$pkg_name"; then
             echo "  [OK] $pkg_name (no version constraint)"
+            VERSION_MISMATCH_PKGS+=("$pkg")
         else
             echo "  [ERROR] Failed to install $pkg_name"
         fi
@@ -71,6 +74,16 @@ echo "[Step 4] Installing Analyzer dependencies..."
 cd Analyzer/
 uv sync
 cd "$SCRIPT_DIR"
+
+if [ ${#VERSION_MISMATCH_PKGS[@]} -gt 0 ]; then
+    echo ""
+    echo "=========================================="
+    echo "Warning: The following packages failed to install with specified version:"
+    for pkg in "${VERSION_MISMATCH_PKGS[@]}"; do
+        echo "  - $pkg"
+    done
+    echo "=========================================="
+fi
 
 echo ""
 echo "=========================================="
