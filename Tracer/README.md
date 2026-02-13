@@ -35,21 +35,24 @@ Usage: mprofiler [OPTION...] [COMMAND]...
 ## Examples
 
 * Profile a target executable
-  Output files will be saved in `tracedata/[target_executable]/[timestamp]/`
+
+* Output files will be saved in `tracedata/[target_executable]/[timestamp]/`
 
 ```bash
 mprofiler --no-print-save --no-print-stack path/to/target_executable
 ```
 
 * Profile a target executable with arguments
-Output files will be saved in `output/[target_executable]/`
+
+* Output files will be saved in `output/[target_executable]/`
 
 ```bash
 mprofiler --no-print-save --no-print-stack --category /name path/to/target_executable [arguments for target_executable]
 ```
 
 * Profile a target executable with verbose info
-Output files will be saved in `output/[target_executable]/`
+
+* Output files will be saved in `output/[target_executable]/`
 
 ```bash
 mprofiler --save-dir output --category /name target_executable [arguments for target_executable]

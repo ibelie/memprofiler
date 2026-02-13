@@ -40,6 +40,8 @@ bash ./run.sh
 Click the Green outlined timestamps to see the corresponding memory layout.
 
 Note: If the memory layout doesn't show up, please check if the cursor is in the "Pan" mode. Only normal cursor can click the timestamps.
+![Memory Metrics](docs/metrics.png)
+![Memory Layout](docs/memory_layout.png)
 
 ## Tracer
 
