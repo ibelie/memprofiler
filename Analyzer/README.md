@@ -1,4 +1,5 @@
 # Analyzer
+
 This component parses compressed logs and performs complex heap state reconstruction.
 
 ## Get Started
@@ -21,7 +22,7 @@ uv sync
 
 ### Analyze
 
-```
+```usage
 usage: main.py --input INPUT_FOLDER [arguments]
 
 options:
@@ -46,13 +47,13 @@ options:
   --peak-detection-window PEAK_DETECTION_WINDOW
                         (int, default=500) Peak detection window (Events)
   --callstack-depth CALLSTACK_DEPTH
-                        (int, default=-1) Callstack depth
+                        (int, default=-1) Callstack depth, -1 for all
   --events-after-peak EVENTS_AFTER_PEAK
                         (int, default=0) Add extra events after the peak (for visualization)
 
   --enable-peak-focus   (bool, default=False) Enable peak focus
   --peak-focus-events PEAK_FOCUS_EVENTS
-                        (int, default=50) Number of events to focus on after the peak
+                        (int, default=50) Number of events to focus on for the peak
   --peak-focus-context PEAK_FOCUS_CONTEXT
                         (int, default=8192) Context expansion size (Bytes)
   --peak-focus-output-events PEAK_FOCUS_OUTPUT_EVENTS
@@ -61,7 +62,7 @@ options:
                         (bool, default=False) Generate peak before layout (for visualization)
 
   --no-cache            (bool, default=False) Disable Cache
-  --clear-cache         (bool, default=False) Clear Cache
+  --clear-cache         (bool, default=False) Clear cache after analysis
   --log-interval LOG_INTERVAL
                         (int, default=2000) Log interval (Events)
   --skip-cpp            (bool, default=False) Whether to skip C++ Operations (new/delete etc.)
@@ -69,7 +70,7 @@ options:
 
 ### Visualize
 
-```
+```usage
 usage: metrics_plotter.py [--timestamp TIMESTAMP] [--benchmark-name BENCHMARK_NAME] [--base-dir BASE_DIR] [-h]
 
 options:
@@ -77,17 +78,17 @@ options:
                         (str, default=final)
   --benchmark-name BENCHMARK_NAME
                         (str, default=test_case)
-  --base-dir BASE_DIR   (Path | None, default=Path(__file__).parent.parent)
+  --base-dir BASE_DIR   (Path, default=Path(__file__).parent.parent)
 ```
 
 ## Run
 
 ```bash
 # Analyze
-uv run main.py --input ...
+uv run main.py --input path/to/tracedata/test_case/ --memory-layout --skip-cpp --final-events --generate-peak-before-layout --enable-peak-focus
 
 # Visualize
-uv run visualizer/metrics_plotter.py --input ...
+uv run visualizer/metrics_plotter.py --base-dir path/to/tracedata/ --benchmark-name test_case
 ```
 
 ## Repo Structure

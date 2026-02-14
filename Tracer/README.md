@@ -1,6 +1,6 @@
 # Tracer
-Functioning as an independent collector agent, thiscomponent leverages debugging/tracing mechanisms to capture mem-
-ory events and their contexts. It serializes and compresses structured data for subsequent offline analysis.
+
+Functioning as an independent collector agent, this component leverages debugging/tracing mechanisms to capture memory events and their contexts. It serializes and compresses structured data for subsequent offline analysis.
 
 ## Build
 
@@ -10,7 +10,7 @@ bash ./script/build.sh
 
 ## Usage
 
-```
+```usage
 Usage: mprofiler [OPTION...] [COMMAND]...
 
   Examples:
@@ -59,7 +59,6 @@ mprofiler --no-print-save --no-print-stack --category /name path/to/target_execu
 ```bash
 mprofiler --save-dir output --category /name target_executable [arguments for target_executable]
 ```
-
 
 ## Repo Structure
 
