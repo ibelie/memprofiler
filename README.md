@@ -86,7 +86,8 @@ bash ./script/build.sh
 cd build/
 ./src/mprofiler --category /name --no-print-save --no-print-stack ./test/test_case 
 ```
-
+**Note:** 
+The target executable must be compiled with debug symbols enabled (e.g., using `-g` flag with GCC) for the tracer to capture stack traces properly.
 Output tracedata will be in `Tracer/build/tracedata/test_case/`
 
 ### Analyzer
@@ -109,6 +110,8 @@ uv sync
 ```bash
 bash script/run_analyzer.sh
 ```
+**Note:** 
+the default input path of the trace log is for the test_case, you can change it in the script 
 
 #### Run Visualizer
 
