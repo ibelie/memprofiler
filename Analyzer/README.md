@@ -1,4 +1,5 @@
 # Analyzer
+This component parses compressed logs and performs complex heap state reconstruction.
 
 ## Get Started
 
