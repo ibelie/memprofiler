@@ -31,14 +31,14 @@ options:
                         (str, default=output) Path to output folder
   --clear-output-dir    (bool, default=False) Clear output directory
   --compact-json        (bool, default=False) Output as compact JSON format
-  --fragmentation       (bool, default=False) Whether to generate fragmentation report
-  --brk-events          (bool, default=False) Whether to generate brk events report
-  --memory-layout       (bool, default=False) Whether to generate memory layout report
-  --final-events        (bool, default=False) Whether to generate final events report
+  --fragmentation       (bool, default=False) Generate fragmentation report
+  --brk-events          (bool, default=False) Generate brk events report
+  --memory-layout       (bool, default=False) Generate memory layout report
+  --final-events        (bool, default=False) Generate final events report
   --report-for-snapshots
-                        (bool, default=False) Whether to generate report for all snapshots
+                        (bool, default=False) Generate report for all snapshots
   --timestamps TIMESTAMPS
-                        (str | None, default=None) Specified snapshot timestamps (comma-separated)
+                        (str | None, default=None) Specified snapshot timestamps (nanoseconds, comma-separated)
   --snapshot-interval SNAPSHOT_INTERVAL
                         (int | None, default=None) Specified snapshot interval (nanoseconds)
 
@@ -61,12 +61,17 @@ options:
   --generate-peak-before-layout
                         (bool, default=False) Generate peak before layout (for visualization)
 
-  --no-cache            (bool, default=False) Disable Cache
+  --no-cache            (bool, default=False) Disable Cacheing
   --clear-cache         (bool, default=False) Clear cache after analysis
   --log-interval LOG_INTERVAL
                         (int, default=2000) Log interval (Events)
   --skip-cpp            (bool, default=False) Whether to skip C++ Operations (new/delete etc.)
 ```
+
+**Note:**
+
+- `--memory-layout`, `--final-events`, `--generate-peak-before-layout` are required for visualization.
+- `--enable-peak-focus` is required for peak focus.
 
 ### Visualize
 
