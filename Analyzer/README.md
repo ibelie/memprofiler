@@ -1,4 +1,5 @@
 # Analyzer
+
 This component parses compressed logs and performs complex heap state reconstruction.
 
 ## Get Started
@@ -21,7 +22,7 @@ uv sync
 
 ### Analyze
 
-```
+```usage
 usage: main.py --input INPUT_FOLDER [arguments]
 
 options:
@@ -30,14 +31,14 @@ options:
                         (str, default=output) Path to output folder
   --clear-output-dir    (bool, default=False) Clear output directory
   --compact-json        (bool, default=False) Output as compact JSON format
-  --fragmentation       (bool, default=False) Whether to generate fragmentation report
-  --brk-events          (bool, default=False) Whether to generate brk events report
-  --memory-layout       (bool, default=False) Whether to generate memory layout report
-  --final-events        (bool, default=False) Whether to generate final events report
+  --fragmentation       (bool, default=False) Generate fragmentation report
+  --brk-events          (bool, default=False) Generate brk events report
+  --memory-layout       (bool, default=False) Generate memory layout report
+  --final-events        (bool, default=False) Generate final events report
   --report-for-snapshots
-                        (bool, default=False) Whether to generate report for all snapshots
+                        (bool, default=False) Generate report for all snapshots
   --timestamps TIMESTAMPS
-                        (str | None, default=None) Specified snapshot timestamps (comma-separated)
+                        (str | None, default=None) Specified snapshot timestamps (nanoseconds, comma-separated)
   --snapshot-interval SNAPSHOT_INTERVAL
                         (int | None, default=None) Specified snapshot interval (nanoseconds)
 
@@ -46,13 +47,13 @@ options:
   --peak-detection-window PEAK_DETECTION_WINDOW
                         (int, default=500) Peak detection window (Events)
   --callstack-depth CALLSTACK_DEPTH
-                        (int, default=-1) Callstack depth
+                        (int, default=-1) Callstack depth, -1 for all
   --events-after-peak EVENTS_AFTER_PEAK
                         (int, default=0) Add extra events after the peak (for visualization)
 
   --enable-peak-focus   (bool, default=False) Enable peak focus
   --peak-focus-events PEAK_FOCUS_EVENTS
-                        (int, default=50) Number of events to focus on after the peak
+                        (int, default=50) Number of events to focus on for the peak
   --peak-focus-context PEAK_FOCUS_CONTEXT
                         (int, default=8192) Context expansion size (Bytes)
   --peak-focus-output-events PEAK_FOCUS_OUTPUT_EVENTS
@@ -60,16 +61,21 @@ options:
   --generate-peak-before-layout
                         (bool, default=False) Generate peak before layout (for visualization)
 
-  --no-cache            (bool, default=False) Disable Cache
-  --clear-cache         (bool, default=False) Clear Cache
+  --no-cache            (bool, default=False) Disable Cacheing
+  --clear-cache         (bool, default=False) Clear cache after analysis
   --log-interval LOG_INTERVAL
                         (int, default=2000) Log interval (Events)
   --skip-cpp            (bool, default=False) Whether to skip C++ Operations (new/delete etc.)
 ```
 
+**Note:**
+
+- `--memory-layout`, `--final-events`, `--generate-peak-before-layout` are required for visualization.
+- `--enable-peak-focus` is required for peak focus.
+
 ### Visualize
 
-```
+```usage
 usage: metrics_plotter.py [--timestamp TIMESTAMP] [--benchmark-name BENCHMARK_NAME] [--base-dir BASE_DIR] [-h]
 
 options:
@@ -77,17 +83,17 @@ options:
                         (str, default=final)
   --benchmark-name BENCHMARK_NAME
                         (str, default=test_case)
-  --base-dir BASE_DIR   (Path | None, default=Path(__file__).parent.parent)
+  --base-dir BASE_DIR   (Path, default=Path(__file__).parent.parent)
 ```
 
 ## Run
 
 ```bash
 # Analyze
-uv run main.py --input ...
+uv run main.py --input path/to/tracedata/test_case/ --memory-layout --skip-cpp --final-events --generate-peak-before-layout --enable-peak-focus
 
 # Visualize
-uv run visualizer/metrics_plotter.py --input ...
+uv run visualizer/metrics_plotter.py --base-dir path/to/tracedata/ --benchmark-name test_case
 ```
 
 ## Repo Structure
